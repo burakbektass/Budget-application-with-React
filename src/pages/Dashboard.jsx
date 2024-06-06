@@ -1,27 +1,63 @@
 import { useLoaderData } from "react-router-dom";
-import { fetchData } from "../helper";
+import { createBudget, fetchData, wait } from "../helper";
 import Intro from "../components/Intro";
 import { toast } from "react-toastify";
+import AddBudgetForm from "../components/AddBudgetForm";
 
 export function dashboardLoader() {
   const userName = fetchData("userName");
-  return { userName };
+  const budgets = fetchData("budgets");
+  return { userName, budgets };
 }
 
 export async function dashboardAction({ request }) {
+    await wait()
   const data = await request.formData();
-  const formData = Object.fromEntries(data);
-  try {
-    localStorage.setItem("userName", JSON.stringify(formData.userName));
-    return toast.success(`Welcome, ${formData.userName}`);
-  } catch (error) {
-    throw new Error("Problem occured while creating account!");
+  const { _action, ...values } = Object.fromEntries(data);
+  console.log(_action, data);
+  if (_action === "newUser") {
+    try {
+      localStorage.setItem("userName", JSON.stringify(values.userName));
+      return toast.success(`Welcome, ${values.userName}`);
+    } catch (error) {
+      throw new Error("Problem occured while creating account!");
+    }
+  } else if (_action === "createBudget") {
+    try {
+      createBudget({
+        name:values.newBudget,
+        amount:values.newBudgetAmount
+      })
+      return toast.success("Budget created!");
+    } catch (e) {
+      throw new Error("There was a problem creating your budget.");
+    }
   }
 }
 
 const Dashboard = () => {
-  const { userName } = useLoaderData();
-  return <>{userName ? <p>{userName}</p> : <Intro />}</>;
+  const { userName, budgets } = useLoaderData();
+  return (
+    <>
+      {userName ? (
+        <div className="dashboard">
+          <h1>
+            Welcome Back, <span className="accent">{userName}</span>
+          </h1>
+          <div className="grid-sm">
+            {/* {budgets ? () : ()} */}
+            <div className="grid-lg">
+              <div className="flex-lg">
+                <AddBudgetForm />
+              </div>
+            </div>
+          </div>
+        </div>
+      ) : (
+        <Intro />
+      )}
+    </>
+  );
 };
 
 export default Dashboard;
