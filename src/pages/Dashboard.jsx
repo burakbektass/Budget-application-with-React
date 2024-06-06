@@ -1,18 +1,27 @@
 import { useLoaderData } from "react-router-dom";
-import { fetchData } from "../helper"
+import { fetchData } from "../helper";
+import Intro from "../components/Intro";
+import { toast } from "react-toastify";
 
-export function dashboardLoader(){
-    const userName = fetchData("userName");
-    return {userName}
+export function dashboardLoader() {
+  const userName = fetchData("userName");
+  return { userName };
 }
 
-const Dashboard = ()=>{
-    const {userName} = useLoaderData()
-    return(
-        <div>
-            <h1>{userName}</h1>
-        </div>
-    )
+export async function dashboardAction({ request }) {
+  const data = await request.formData();
+  const formData = Object.fromEntries(data);
+  try {
+    localStorage.setItem("userName", JSON.stringify(formData.userName));
+    return toast.success(`Welcome, ${formData.userName}`);
+  } catch (error) {
+    throw new Error("Problem occured while creating account!");
+  }
 }
 
-export default Dashboard
+const Dashboard = () => {
+  const { userName } = useLoaderData();
+  return <>{userName ? <p>{userName}</p> : <Intro />}</>;
+};
+
+export default Dashboard;
