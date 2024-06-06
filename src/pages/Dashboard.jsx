@@ -1,5 +1,5 @@
 import { useLoaderData } from "react-router-dom";
-import { fetchData } from "./helper"
+import { fetchData } from "../helper"
 
 export function dashboardLoader(){
     const userName = fetchData("userName");
