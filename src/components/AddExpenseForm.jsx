@@ -1,6 +1,6 @@
 import { useFetcher } from "react-router-dom";
-import { useRef,useEffect } from "react";
-import {PlusCircleIcon} from "@heroicons/react/24/solid"
+import { useRef, useEffect } from "react";
+import { PlusCircleIcon } from "@heroicons/react/24/solid";
 
 const AddExpenseForm = ({ budgets }) => {
   const fetcher = useFetcher();
@@ -9,11 +9,11 @@ const AddExpenseForm = ({ budgets }) => {
   const isSubmitting = fetcher.state === "submitting";
 
   useEffect(() => {
-    if(!isSubmitting){
-        formRef.current.reset();
-        focusRef.current.focus();
+    if (!isSubmitting) {
+      formRef.current.reset();
+      focusRef.current.focus();
     }
-  },[])
+  }, [isSubmitting]);
   return (
     <div className="form-wrapper">
       <h2 className="h3">

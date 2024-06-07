@@ -47,3 +47,29 @@ export const createExpense = ({ name, amount, budgetId }) => {
     JSON.stringify([...existingExpenses, newItem])
   );
 };
+
+export const formatCurrency = (amount) => {
+  return amount.toLocaleString(undefined, {
+    style: "currency",
+    currency: "USD",
+  });
+};
+
+export const calculateSpentByBudget = (budgetId) => {
+  const expenses = fetchData("expenses") ?? [];
+  const budgetSpent = expenses.reduce((acc, expense) => {
+    console.log(expense, budgetId);
+    if (expense.budgetId !== budgetId) return acc;
+
+    return (acc += expense.amount);
+  }, 0);
+  console.log(budgetSpent);
+  return budgetSpent;
+};
+
+export const formatPercantage = (amount) => {
+  return amount.toLocaleString(undefined,{
+    style:"percent",
+    minimumFractionDigits:0
+  })
+};
