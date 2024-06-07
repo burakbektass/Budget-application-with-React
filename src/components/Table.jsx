@@ -1,7 +1,6 @@
 import ExpenseItem from "./ExpenseItem";
 
 const Table = ({ expenses }) => {
-  console.log(expenses);
   return (
     <div className="table">
       <table>

@@ -58,12 +58,10 @@ export const formatCurrency = (amount) => {
 export const calculateSpentByBudget = (budgetId) => {
   const expenses = fetchData("expenses") ?? [];
   const budgetSpent = expenses.reduce((acc, expense) => {
-    console.log(expense, budgetId);
     if (expense.budgetId !== budgetId) return acc;
 
     return (acc += expense.amount);
   }, 0);
-  console.log(budgetSpent);
   return budgetSpent;
 };
 

@@ -1,5 +1,5 @@
 //Libraries and helper
-import { useLoaderData } from "react-router-dom";
+import { useLoaderData, Link } from "react-router-dom";
 import { createBudget, fetchData, wait, createExpense } from "../helper";
 import { toast } from "react-toastify";
 //Components
@@ -20,7 +20,6 @@ export async function dashboardAction({ request }) {
   await wait();
   const data = await request.formData();
   const { _action, ...values } = Object.fromEntries(data);
-  console.log(_action, data);
   if (_action === "newUser") {
     try {
       localStorage.setItem("userName", JSON.stringify(values.userName));
@@ -77,7 +76,11 @@ const Dashboard = () => {
                 {expenses && expenses.length > 0 && (
                   <div className="grid-md">
                     <h2>Recent Expenses</h2>
-                    <Table expenses={expenses.sort((a, b) => b.createdAt - a.createdAt)}/>
+                    <Table expenses={expenses.sort((a, b) => b.createdAt - a.createdAt).slice(0,8)}/>
+                    {expenses.length > 8 && (
+                      <Link to="expenses"
+                      className="btn btn--dark">View all expenses</Link>
+                    )}
                   </div>
                 )}
               </div>
