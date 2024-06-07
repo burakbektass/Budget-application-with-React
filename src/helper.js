@@ -4,7 +4,7 @@ const generateRandomColor = () => {
 };
 
 export const wait = () =>
-  new Promise((res) => setTimeout(res, Math.random() * 2000));
+  new Promise((res) => setTimeout(res, Math.random() * 800));
 
 export const fetchData = (key) => {
   return JSON.parse(localStorage.getItem(key));
@@ -68,8 +68,10 @@ export const calculateSpentByBudget = (budgetId) => {
 };
 
 export const formatPercantage = (amount) => {
-  return amount.toLocaleString(undefined,{
-    style:"percent",
-    minimumFractionDigits:0
-  })
+  return amount.toLocaleString(undefined, {
+    style: "percent",
+    minimumFractionDigits: 0,
+  });
 };
+
+export const formatDateToLocal = (epoch) => new Date(epoch).toLocaleString();
