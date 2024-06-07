@@ -1,6 +1,9 @@
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import Dashboard, { dashboardAction, dashboardLoader } from "./pages/Dashboard";
-import ExpensesPage, {expensesLoader} from "./pages/ExpensesPage";
+import ExpensesPage, {
+  expensesLoader,
+  expensesAction,
+} from "./pages/ExpensesPage";
 
 import Error from "./pages/Error";
 import Main, { mainLoader } from "./layouts/main";
@@ -27,7 +30,7 @@ function App() {
           path: "/expenses",
           element: <ExpensesPage />,
           loader: expensesLoader,
-          action: dashboardAction,
+          action: expensesAction,
           errorElement: <Error />,
         },
         {
