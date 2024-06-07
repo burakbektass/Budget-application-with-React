@@ -127,7 +127,7 @@ p {
     cubic-bezier(0.075, 0.82, 0.165, 1);
   transition: -webkit-box-shadow 300ms cubic-bezier(0.075, 0.82, 0.165, 1);
   -o-transition: box-shadow 300ms cubic-bezier(0.075, 0.82, 0.165, 1);
-  -webkit-transition: -webkit-box-shadow 300ms
+  -webkit-transition: -webkit-box-shadow 300ms;
     cubic-bezier(0.075, 0.82, 0.165, 1);
   transition: box-shadow 300ms cubic-bezier(0.075, 0.82, 0.165, 1);
   transition: box-shadow 300ms cubic-bezier(0.075, 0.82, 0.165, 1),
