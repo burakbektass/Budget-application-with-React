@@ -1,4 +1,3 @@
-//Libraries and helper
 import { useLoaderData, Link } from "react-router-dom";
 import {
   createBudget,
@@ -8,7 +7,6 @@ import {
   deleteItem,
 } from "../helper";
 import { toast } from "react-toastify";
-//Components
 import Intro from "../components/Intro";
 import AddBudgetForm from "../components/AddBudgetForm";
 import AddExpenseForm from "../components/AddExpenseForm";

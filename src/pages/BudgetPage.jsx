@@ -17,7 +17,6 @@ export async function budgetLoader({ params }) {
     key: "budgetId",
     value: params.id,
   });
-  console.log(budget);
   if (!budget) {
     throw new Error("The budget you're trying to find does not exist!");
   }
@@ -65,7 +64,7 @@ const BudgetPage = () => {
         <span className="accent">{budget.name}</span> Overview
       </h1>
       <div className="flex-lg">
-        <BudgetItem budget={budget} />
+        <BudgetItem budget={budget} showDelete={true} />
         <AddExpenseForm budgets={[budget]} />
       </div>
       {expenses && expenses.length > 0 && (
