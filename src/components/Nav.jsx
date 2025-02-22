@@ -1,4 +1,4 @@
-import logoMark from "../assets/logoMark.svg";
+const logoMark = "/assets/logoMark.svg";
 import { Form, NavLink } from "react-router-dom";
 import { BeakerIcon, TrashIcon } from "@heroicons/react/24/solid";
 

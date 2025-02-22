@@ -14,6 +14,7 @@ export default defineConfig({
   // SVG ve diğer asset'ler için
   assetsInclude: ['**/*.svg'],
   build: {
+    outDir: 'dist',
     assetsDir: 'assets',
     rollupOptions: {
       input: {
